@@ -51,15 +51,16 @@ public abstract class ProcessButton extends FlatButton {
         mMinProgress = 0;
         mMaxProgress = 100;
 
-        mProgressDrawable = (GradientDrawable) getDrawable(R.drawable.rect_progress).mutate();
-        mProgressDrawable.setCornerRadius(getCornerRadius());
+        if (!isInEditMode()) {
+            mProgressDrawable = (GradientDrawable) getDrawable(R.drawable.rect_progress).mutate();
+            mProgressDrawable.setCornerRadius(getCornerRadius());
 
-        mCompleteDrawable = (GradientDrawable) getDrawable(R.drawable.rect_complete).mutate();
-        mCompleteDrawable.setCornerRadius(getCornerRadius());
+            mCompleteDrawable = (GradientDrawable) getDrawable(R.drawable.rect_complete).mutate();
+            mCompleteDrawable.setCornerRadius(getCornerRadius());
 
-        mErrorDrawable = (GradientDrawable) getDrawable(R.drawable.rect_error).mutate();
-        mErrorDrawable.setCornerRadius(getCornerRadius());
-
+            mErrorDrawable = (GradientDrawable) getDrawable(R.drawable.rect_error).mutate();
+            mErrorDrawable.setCornerRadius(getCornerRadius());
+        }
 
         if (attrs != null) {
             initAttributes(context, attrs);
@@ -109,31 +110,6 @@ public abstract class ProcessButton extends FlatButton {
 
         invalidate();
     }
-
-    /*  protected void onDisable() {
-          setBackgroundCompat(getDisableDrawable());
-      }
-
-      protected void onEnable() {
-          setProgress(mProgress);
-      }
-
-      @Override
-      public void setEnabled(boolean enabled) {
-
-          if (enabled) {
-              onEnable();
-          } else {
-              onDisable();
-          }
-          super.setEnabled(enabled);
-      }
-
-      @Override
-      public boolean isEnabled() {
-          return super.isEnabled();
-      }
-      */
 
 
     private OnClickListener normal_state_click, complete_state_click, error_state_click, process_state_click;

@@ -19,6 +19,8 @@ import android.widget.Button;
 
 
 public class FlatButton extends Button {
+    private static final String TAG = FlatButton.class.getSimpleName();
+
     public static final int BUTTON_BOTTOM_PAD = 1, BUTTON_FLAT = 2, BUTTON_EXTENSION = 3;
     private StateListDrawable mNormalDrawable;
     private GradientDrawable mDisabledDrawable;
@@ -75,6 +77,10 @@ public class FlatButton extends Button {
             return;
         }
 
+        if (isInEditMode()) {
+            return;
+        }
+
         try {
             defColor_blue = getResources().getColor(R.color.blue_normal);
             defColor_blue_dark = getResources().getColor(R.color.blue_pressed);
@@ -86,6 +92,8 @@ public class FlatButton extends Button {
             button_presentation = extension_button_presentation(mAttr.getInt(R.styleable.FlatButton_pb_presentation, BUTTON_BOTTOM_PAD));
             initAttributesExtension(context, attributeSet);
             constructNormalDrawable(mNormalDrawable);
+        } catch (NullPointerException ex) {
+            Log.e(TAG, "missing required resources to initiate FlatButton", ex);
         } finally {
             mAttr.recycle();
         }
@@ -99,7 +107,7 @@ public class FlatButton extends Button {
                     setTypeface(typeface);
                 }
             } catch (Exception e) {
-                Log.d("fonrloading", e.getMessage());
+                Log.d(TAG, "failed to set font for FlatButton", e);
             }
         }
     }
@@ -122,6 +130,9 @@ public class FlatButton extends Button {
     }
 
     protected LayerDrawable getLayersById(@DrawableRes int id) {
+        if (getDrawable(id) == null) {
+            return null;
+        }
         return (LayerDrawable) getDrawable(id).mutate();
     }
 
