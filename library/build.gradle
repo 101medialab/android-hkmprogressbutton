@@ -13,7 +13,7 @@ ext {
 android {
     compileSdkVersion 24
     buildToolsVersion '23.0.3'
-    def libPrefix = 'hkmprogressbutton'
+    def libPrefix = 'hkmprogressbutton-'
 
     defaultConfig {
         minSdkVersion 16
