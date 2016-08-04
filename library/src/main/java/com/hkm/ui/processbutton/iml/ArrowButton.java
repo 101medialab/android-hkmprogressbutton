@@ -198,7 +198,6 @@ public class ArrowButton extends ProcessButton {
 
     protected Drawable getArrow() {
         BitmapDrawable draw = (BitmapDrawable) getDrawable(resArrow).mutate();
-        Log.w(TAG, String.format("arrowColor=%d", arrowColor));
         if (arrowColor != 0) {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                 Drawable wrappedArrowDrawable = DrawableCompat.wrap(draw);
